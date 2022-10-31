@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+{% block content %}
+
+    <h1 class="display-1">Login page</h1>
+
+    </br>
+    <form method="POST" action="/login" class="row g-2" novalidate>
+    {{ form.csrf_token }}  <!-- {{ form.hidden_tag() }}  -->
+    <div class="col-12">
+    {{ form.username.label }} {{ form.username(class="form-control") }}
+    </div>
+    <div class="col-12">
+    {{ form.password.label }} {{ form.password(class="form-control")}}
+    </div>
+    <div class="col-12">
+    {{ form.submit (class="btn btn-warning") }}
+    </div>
+    </form>
+    <br>
+
+    Not registered yet? <a href="{{ url_for('func_register') }}">Create a new account</a>
+    
+{% endblock %}
