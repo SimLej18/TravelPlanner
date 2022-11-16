@@ -1,4 +1,4 @@
-from source import app
+from source import flask_app
 from source import db
 
 from flask import render_template, redirect
@@ -19,7 +19,7 @@ def standard_error(error, customRedirect=False, redirectLink='', redirectMessage
 	"""
 	return render_template(
 		'errorPage.html',
-		error=error, 
+		error=error,
 		customRedirect=customRedirect,
 		redirectLink=redirectLink,
 		redirectMessage=redirectMessage)
@@ -48,11 +48,11 @@ def page_not_found(e):
 	"""
 	return render_template('status/404.html'), 404
 
-@app.route("/")
+@flask_app.route("/")
 def render():
     return render_template('index.html')
 
-@app.route("/login", methods=["GET", "POST"])
+@flask_app.route("/login", methods=["GET", "POST"])
 def login():
     """
     Login function.
@@ -66,7 +66,7 @@ def login():
     if current_user.is_authenticated :
         flash("Vous êtes déjà connecté à votre compte", "warning")
         return redirect(url_for('homepage'))
-    
+
     form = LoginForm()
     #Verification of the form
     if form.validate_on_submit():
@@ -83,7 +83,7 @@ def login():
     return render_template('login.html',form = form)
 
 
-@app.route("/register", methods=["GET", "POST"])
+@flask_app.route("/register", methods=["GET", "POST"])
 def register() :
     """
     Registration function. If the user is already logged, then we'll go back to the home page.
@@ -96,7 +96,7 @@ def register() :
         #User is logged
         flash("Vous êtes déjà connecté à votre compte.", "info")
         return redirect(url_for("homepage"))
-    
+
     form = RegisterForm()
     if form.validate_on_submit():
         #Add the user
@@ -109,10 +109,10 @@ def register() :
     return render_template('register.html', form = form)
 
 
-@app.route("/logout")
+@flask_app.route("/logout")
 def logout():
     """
-    Logout of the user. The user will go back to the home page. 
+    Logout of the user. The user will go back to the home page.
     Redirection to the main page.
     """
     if current_user.is_authenticated :
@@ -120,7 +120,7 @@ def logout():
     return redirect(url_for("homepage"))
 
 
-@app.route("/profile")
+@flask_app.route("/profile")
 @login_required
 def profile() :
     """
@@ -131,7 +131,7 @@ def profile() :
         return render_template('profile.html')
 
 
-@app.route("/deleteProfile")
+@flask_app.route("/deleteProfile")
 @login_required
 def deleteProfile() :
     """
@@ -143,7 +143,7 @@ def deleteProfile() :
     return redirect(url_for("homepage"))
 
 
-@app.route("/editProfile", methods=["GET", "POST"])
+@flask_app.route("/editProfile", methods=["GET", "POST"])
 @login_required
 def editProfile() :
     """
@@ -167,7 +167,7 @@ def editProfile() :
         return render_template('account.html', form = form)
 
 
-@app.route("/editMDP", methods=["GET", "POST"])
+@flask_app.route("/editMDP", methods=["GET", "POST"])
 @login_required
 def editMDP():
     """

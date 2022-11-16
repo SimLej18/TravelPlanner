@@ -1,1 +1,2 @@
-from source import app
+from source import flask_app
+flask_app.run(debug=True)

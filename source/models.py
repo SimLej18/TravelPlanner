@@ -4,6 +4,9 @@ from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 from source import login_manager
 
+@login_manager.user_loader
+def load_user(user_id):
+    return Account.get(user_id)
 
 class Account(UserMixin, db.Model) :
     """
@@ -25,7 +28,7 @@ class Account(UserMixin, db.Model) :
     def getUsername(self) :
         """
         Getter of the username.
-        Return : 
+        Return :
         ----------
         Username
         """
@@ -38,7 +41,7 @@ class Account(UserMixin, db.Model) :
         """
         self.password = generate_password_hash(password)
         db.session.commit()
-    
+
     def checkPassword(self, password) :
         """
         Check if the password do correspond.
@@ -57,13 +60,13 @@ class Account(UserMixin, db.Model) :
         """
         return "<User id : %d, username : %s, lastName : %s, firstName : %s, email : %s>" % (self.id, self.username, self.lastName, self.firstName, self.email)
 
+"""
 #The DB part :
 db.drop_all()
 db.create_all()
 
-
 #Hardcode of my user in the DB (just for convenience)
-utilisateurs = Account(username = "willemab", lastName = "Willemart", firstName = "Blandine", email = "blandine.willemart@student.unamur.be", password = "mypassword"
-db.session.add(utilisateurs)
-
+utilisateur = Account(username = "willemab", lastName = "Willemart", firstName = "Blandine", email = "blandine.willemart@student.unamur.be", password = "mypassword"
+db.session.add(utilisateur)
 db.session.commit()
+"""
