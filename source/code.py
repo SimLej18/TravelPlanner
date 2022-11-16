@@ -13,6 +13,15 @@ from source.forms import *
 from source.models import *
 from werkzeug.security import check_password_hash
 
+with flask_app.app_context():
+	db.drop_all()
+	db.create_all()
+
+	#Hardcode of my user in the DB (just for convenience)
+	utilisateur = Account(username = "willemab", lastName = "Willemart", firstName = "Blandine", email = "blandine.willemart@student.unamur.be", password = "mypassword")
+	db.session.add(utilisateur)
+	db.session.commit()
+
 def standard_error(error, customRedirect=False, redirectLink='', redirectMessage=''):
 	"""
 	Utilisé pour afficher des informations à l'utilisateur lorsque quelque chose ne va pas

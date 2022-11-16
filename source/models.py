@@ -59,14 +59,3 @@ class Account(UserMixin, db.Model) :
         Representation of a user.
         """
         return "<User id : %d, username : %s, lastName : %s, firstName : %s, email : %s>" % (self.id, self.username, self.lastName, self.firstName, self.email)
-
-"""
-#The DB part :
-db.drop_all()
-db.create_all()
-
-#Hardcode of my user in the DB (just for convenience)
-utilisateur = Account(username = "willemab", lastName = "Willemart", firstName = "Blandine", email = "blandine.willemart@student.unamur.be", password = "mypassword"
-db.session.add(utilisateur)
-db.session.commit()
-"""

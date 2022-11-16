@@ -24,8 +24,8 @@ login_manager.session_protection = 'strong'
 # Database part :
 db = SQLAlchemy(flask_app)
 
-# Socket parts :
-socketio = SocketIO(flask_app)
-
 from source import code
 from source import models
+
+# Socket parts :
+socketio = SocketIO(flask_app)
