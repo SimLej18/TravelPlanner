@@ -81,8 +81,8 @@ async function getEvents(){
                 record.fields.title != null ? record.fields.title : "null",  // Name
                 record.fields.geo_point_2d[0],  // Longitude
                 record.fields.geo_point_2d[1],  // Latitude
-                record.fields.datedebut != null ? record.fields.datedebut : "null",  // Start
-                record.fields.datefin != null ? record.fields.datefin : "null", // Finish
+                record.fields.datedebut != null ? new Date(record.fields.datedebut) : "null",  // Start
+                record.fields.datefin != null ? new Date(record.fields.datefin) : "null", // Finish
                 record.fields.acom_nom_m != null ? record.fields.rue_nom + " " + record.fields.adr_nopol + ", " + record.fields.post_code + " " + record.fields.acom_nom_m : "null",  // Address
                 record.fields.details != null ? record.fields.details : "null", // Finish
                 record.fields.link != null ? record.fields.link : "null" // Finish
@@ -93,6 +93,13 @@ async function getEvents(){
 
     // Done
     return events;
+}
+
+async function getCurrentEvents(date) {
+    /*
+    * Cette fonction renvoie la liste des événements ayant lieu à la date indiquée
+    */
+    return (await getEvents()).filter(e => date > e.start && date < e.finish);
 }
 
 async function getMuseums() {
