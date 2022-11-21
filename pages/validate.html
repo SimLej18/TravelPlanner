@@ -10,10 +10,16 @@
     <link href="../libraries/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../styles/styles.css">
-    <script src="../scripts/main.js" defer></script>
     <script src="../scripts/data.js" defer></script>
     <script src="../scripts/view.js" defer></script>
     <script src="../scripts/controller.js" defer></script>
+    <script src="../scripts/main.js" defer></script>
+
+    <script>
+      $(document).ready(async () => {
+        Controller.loadSummary();
+      })
+    </script>
   </head>
 
   <body>
@@ -22,10 +28,46 @@
       <img class="card-map-left" src="../images/map.jpeg">
       <div class="card-body">
         <h1>Résumé de votre excursion :</h1>
-        <p style="color: red">Petit résumé de l'excursion à compléter</p>
+        <div class="summary-container">
+          <div class="summary-stage">
+            <div class="separator">
+              <h4><span id="type1" class="badge bg-secondary"></span></h4>
+              <div><hr/></div>
+            </div>
+            <p id="title1" class="text-start fs-6"></p>
+          </div>
+          <div class="summary-stage">
+            <div class="separator">
+              <h4><span id="type2" class="badge bg-secondary"></span></h4>
+              <div><hr/></div>
+            </div>
+            <p id="title2" class="text-start fs-6"></p>
+          </div>
+          <div class="summary-stage">
+            <div class="separator">
+              <h4><span id="type3" class="badge bg-secondary"></span></h4>
+              <div><hr/></div>
+            </div>
+            <p id="title3" class="text-start fs-6"></p>
+          </div>
+          <div class="summary-stage">
+            <div class="separator">
+              <h4><span id="type4" class="badge bg-secondary"></span></h4>
+              <div><hr/></div>
+            </div>
+            <p id="title4" class="text-start fs-6"></p>
+          </div>
+          <div class="summary-stage">
+            <div class="separator">
+              <h4><span id="type5" class="badge bg-secondary"></span></h4>
+              <div><hr/></div>
+            </div>
+            <p id="title5" class="text-start fs-6"></p>
+          </div>
+        </div>
         <div class="btn-container">
-          <a class="btn btn-lg btn-secondary" href="generation.html" role="button">Pas sûr...</a>
-          <a class="btn btn-lg btn-success" href="tour.html" role="button">C'est parti !</a>
+          <a class="btn btn-lg btn-secondary" onclick="Controller.goBackSummary()" role="button">Pas sûr...</a>
+          <a class="btn btn-lg btn-success" onclick="Controller.validateSummary()" role="button">C'est parti !</a>
         </div>
       </div>
     </div>

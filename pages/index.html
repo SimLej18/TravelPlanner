@@ -8,12 +8,21 @@
     <script src="../libraries/jquery.min.js"></script>
     <script src="../libraries/bootstrap.bundle.min.js"></script>
     <link href="../libraries/bootstrap.min.css" rel="stylesheet">
+    <script src="../libraries/graphology.min.js"></script>
 
     <link rel="stylesheet" href="../styles/styles.css">
-    <script src="../scripts/main.js" defer></script>
     <script src="../scripts/data.js" defer></script>
     <script src="../scripts/view.js" defer></script>
+    <script src="../scripts/random_logic.js" defer></script>
     <script src="../scripts/controller.js" defer></script>
+    <script src="../scripts/main.js" defer></script>
+
+    <script>
+      $(document).ready(async () => {
+        await initApp();
+        $("#startButton").prop("disabled", false);
+      })
+    </script>
   </head>
 
   <body>
@@ -22,7 +31,7 @@
       <div class="card-body">
         <h1>Bienvenue sur Namur Travel Planifier !</h1>
         <p style="color: red">Petite description de l'outil à compléter</p>
-        <a class="btn btn-lg btn-primary" href="generation.html" role="button">Créer une excursion originale !</a>
+        <button id="startButton" class="btn btn-lg btn-primary" disabled onclick="Controller.start()" role="button">Créer une excursion originale !</button>
       </div>
     </div>
 

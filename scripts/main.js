@@ -2,4 +2,10 @@
 Here we code everything that is not managed elsewhere.
 */
 
-console.log("Hello la console !");
+async function initApp() {
+    // Flush localStorage
+    localStorage.clear();
+
+    // Add mock data to db
+    await Controller.createMockDB();
+}

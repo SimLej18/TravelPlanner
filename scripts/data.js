@@ -3,16 +3,6 @@ Here we recover all the data from the different APIs and format it to make it
 available to other scripts via soma async functions.
 */
 
-var name;
-
-function changeName(newName) {
-  name = newName;
-}
-
-function getName() {
-  return name;
-}
-
 class Stage {
     /*
     * This class defines a stage (aka. a stop, a halt) in an excursion
@@ -24,7 +14,6 @@ class Stage {
         this.longitude = longitude
         this.latitude = latitude
     }
-
 }
 
 class Event extends Stage {
@@ -33,6 +22,7 @@ class Event extends Stage {
     */
     constructor(name, longitude, latitude, start, finish, address, description, link) {
         super(name, longitude, latitude);
+        this.type = "event";
         this.name = name;
         this.start = start;
         this.finish = finish;
@@ -48,6 +38,7 @@ class Museum extends Stage {
     */
     constructor(name, longitude, latitude, address, description, phone, mail) {
         super(name, longitude, latitude);
+        this.type = "museum";
         this.address = address;
         this.description = description;
         this.phone = phone;
@@ -61,6 +52,7 @@ class Monument extends Stage {
     */
     constructor(name, longitude, latitude) {
         super(name, longitude, latitude);
+        this.type = "monument";
     }
 }
 
@@ -156,6 +148,10 @@ async function getMonuments() {
 
     // Done
     return monuments;
+}
+
+function getRandomPreviousExcursion(mockDatabase) {
+    return mockDatabase.excursions[Math.floor(Math.random()*mockDatabase.excursions.length)];
 }
 
 

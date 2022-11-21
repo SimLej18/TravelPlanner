@@ -24,7 +24,7 @@ body > .card {
 }
 
 .card > .card-body {
-  margin: 2em;
+  margin: 1em;
 }
 
 .card-body {
@@ -94,7 +94,7 @@ body > .card {
 }
 
 .card-map-left {
-  border-radius: 3em;
+  border-radius: 3em 0 0 3em;
   width: 66%;
 }
 
@@ -120,4 +120,30 @@ body > .card {
   font-size: 9em;
 }
 
+.stages-container {
+  height: 16em;
+  overflow: scroll;
+}
 
+.separator {
+  display: flex;
+  flex-direction: row;
+}
+
+.separator > div {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.separator > div > hr {
+  width: 90%;
+}
+
+.summary-stage {
+  padding: 0.2em 0;
+}
+
+.summary-container {
+  overflow: scroll;
+}
