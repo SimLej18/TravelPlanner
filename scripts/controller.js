@@ -19,7 +19,7 @@ class Controller {
     save("mockDB", mockDatabase);
   }
   static start() {
-    window.location.href = "../docs/generation.html";
+    window.location.href = "docs/generation.html";
   }
 
   static async createSuggestions() {
