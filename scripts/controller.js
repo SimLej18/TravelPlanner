@@ -19,7 +19,7 @@ class Controller {
     save("mockDB", mockDatabase);
   }
   static start() {
-    window.location.href = "../pages/generation.html";
+    window.location.href = "../docs/generation.html";
   }
 
   static async createSuggestions() {
@@ -33,7 +33,7 @@ class Controller {
 
   static choseSuggestion(nb) {
     save("excursion", get("suggestions")[nb-1]);
-    window.location.href = "../pages/validate.html";
+    window.location.href = "../docs/validate.html";
   }
 
   static loadSummary() {
@@ -42,11 +42,11 @@ class Controller {
 
   static goBackSummary() {
     save("comingBack", "true");
-    window.location.href = "../pages/generation.html";
+    window.location.href = "../docs/generation.html";
   }
 
   static validateSummary() {
-    window.location.href = "../pages/tour.html";
+    window.location.href = "../docs/tour.html";
   }
 }
 
