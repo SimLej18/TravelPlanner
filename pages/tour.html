@@ -1,0 +1,49 @@
+<!-- Here we have the whole body of the website -->
+<html>
+  <head>
+    <!-- Here import various scripts and styles -->
+    <title>En route !</title>
+    <link rel="icon" type="image/x-icon" href="../images/NTP-Logo.ico">
+
+    <script src="../libraries/jquery.min.js"></script>
+    <script src="../libraries/bootstrap.bundle.min.js"></script>
+    <link href="../libraries/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles/styles.css">
+    <script src="../scripts/main.js" defer></script>
+    <script src="../scripts/data.js" defer></script>
+    <script src="../scripts/view.js" defer></script>
+    <script src="../scripts/controller.js" defer></script>
+  </head>
+
+  <body>
+    <!-- Here we implement the content of the website -->
+    <div class="card card-tour">
+      <img class="card-img-top" src="../images/map.jpeg">
+      <div class="card-body">
+        <h1>< nom de l'endroit ></h1>
+        <p style="color: red">Description à compléter</p>
+        <div class="btn-container">
+          <a class="btn btn-lg btn-secondary disabled" href="generation.html" role="button">Précédent</a>
+          <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+            <label class="btn btn-outline-primary" for="btnradio1">&emsp;#1&emsp;</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio2">&emsp;#2&emsp;</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio3">&emsp;#3&emsp;</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio4">&emsp;#4&emsp;</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio5">&emsp;#5&emsp;</label>
+          </div>
+          <a class="btn btn-lg btn-success" href="comment.html" role="button">Suivant</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
