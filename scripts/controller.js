@@ -60,7 +60,7 @@ class Controller {
   }
 
   static loadStage() {
-    View.loadStage(get("excursion")[Controller.currentStage-1], Controller.currentStage);
+    View.loadStage(get("excursion"), Controller.currentStage);
   }
 
   static nextStage() {

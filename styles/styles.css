@@ -36,6 +36,7 @@ body > .card {
 
 .card-img-top {
   border-radius: 2em;
+  height: 33%;
 }
 
 .card-tour > .card-img-top {
@@ -51,6 +52,9 @@ body > .card {
   box-shadow: none;
 }
 
+.olControlAttribution {
+  visibility: hidden;
+}
 
 /* ------------ Custom classes ------------ */
 
@@ -96,6 +100,16 @@ body > .card {
 .card-map-left {
   border-radius: 3em 0 0 3em;
   width: 66%;
+}
+
+.map-left {
+  border-radius: 3em 0 0 3em;
+  overflow: hidden;
+}
+
+.map-top {
+  border-radius: 2em 2em 0 0;
+  overflow: hidden;
 }
 
 .btn-container {

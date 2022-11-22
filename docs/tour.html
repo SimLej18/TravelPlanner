@@ -9,6 +9,7 @@
     <script src="../libraries/bootstrap.bundle.min.js"></script>
     <link href="../libraries/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
 
     <link rel="stylesheet" href="../styles/styles.css">
     <script src="../scripts/data.js" defer></script>
@@ -26,7 +27,9 @@
   <body>
     <!-- Here we implement the content of the website -->
     <div class="card card-tour">
-      <img class="card-img-top" src="../images/map.jpeg">
+      <div class="card-img-top">
+        <div id="mapdiv" class="map-top"></div>
+      </div>
       <div class="card-body">
         <h1 id="stageName"></h1>
         <div id="infoContainer" class="info-container">
