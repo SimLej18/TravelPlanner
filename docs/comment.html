@@ -23,17 +23,22 @@
       <div class="card-body">
         <h1>Avez-vous aimé cette excursion ?</h1>
         <div class="appreciation-container">
-          <button class="btn btn-outline-danger appreciation">
+          <button class="btn btn-outline-danger appreciation" onclick="Controller.giveAppreciation(0)">
             <i class="bi bi-heartbreak"></i>
           </button>
-          <button class="btn btn-outline-danger appreciation">
+          <button class="btn btn-outline-danger appreciation" onclick="Controller.giveAppreciation(1)">
             <i class="bi bi-heart-half"></i>
           </button>
-          <button class="btn btn-outline-danger appreciation">
+          <button class="btn btn-outline-danger appreciation" onclick="Controller.giveAppreciation(2)">
             <i class="bi bi-heart-fill"></i>
           </button>
         </div>
-        <a class="btn btn-lg btn-primary" href="../index.html" role="button">Revenir à l'accueil</a>
+        <div>
+          <p id="thank-message" class="fs-4" hidden>Merci de nous avoir donné votre avis !</p>
+          <p id="message-did-not-like" class="fs-4" hidden>Cette excursion sera moins recommandée à l'avenir.</p>
+          <p id="message-did-like" class="fs-4" hidden>Cette excursion sera plus recommandée à l'avenir !</p>
+          <a class="btn btn-lg btn-primary" href="../index.html" role="button">Revenir à l'accueil</a>
+        </div>
       </div>
     </div>
   </body>

@@ -150,8 +150,8 @@ async function getMonuments() {
     return monuments;
 }
 
-function getRandomPreviousExcursion(mockDatabase) {
-    return mockDatabase.excursions[Math.floor(Math.random()*mockDatabase.excursions.length)];
+function getRandomExistingExcursionID(mockDatabase) {
+    return Math.floor(Math.random()*mockDatabase.excursions.length);
 }
 
 

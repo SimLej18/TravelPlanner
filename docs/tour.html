@@ -8,12 +8,19 @@
     <script src="../libraries/jquery.min.js"></script>
     <script src="../libraries/bootstrap.bundle.min.js"></script>
     <link href="../libraries/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="../styles/styles.css">
     <script src="../scripts/data.js" defer></script>
     <script src="../scripts/view.js" defer></script>
     <script src="../scripts/controller.js" defer></script>
     <script src="../scripts/main.js" defer></script>
+
+    <script>
+      $(document).ready(async () => {
+        Controller.loadStage();
+      })
+    </script>
   </head>
 
   <body>
@@ -21,27 +28,29 @@
     <div class="card card-tour">
       <img class="card-img-top" src="../images/map.jpeg">
       <div class="card-body">
-        <h1>< nom de l'endroit ></h1>
-        <p style="color: red">Description à compléter</p>
+        <h1 id="stageName"></h1>
+        <div id="infoContainer" class="info-container">
+        </div>
+        <p id="stageDescription">Description à compléter</p>
         <div class="btn-container">
-          <a class="btn btn-lg btn-secondary disabled" href="generation.html" role="button">Précédent</a>
+          <button id="previousButton" class="btn btn-lg btn-secondary disabled" onclick="Controller.previousStage()" role="button">Précédent</button>
           <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" onclick="Controller.changeStage(1)" autocomplete="off" checked>
             <label class="btn btn-outline-primary" for="btnradio1">&emsp;#1&emsp;</label>
 
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" onclick="Controller.changeStage(2)" autocomplete="off">
             <label class="btn btn-outline-primary" for="btnradio2">&emsp;#2&emsp;</label>
 
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" onclick="Controller.changeStage(3)" autocomplete="off">
             <label class="btn btn-outline-primary" for="btnradio3">&emsp;#3&emsp;</label>
 
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio4" onclick="Controller.changeStage(4)" autocomplete="off">
             <label class="btn btn-outline-primary" for="btnradio4">&emsp;#4&emsp;</label>
 
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio5" onclick="Controller.changeStage(5)" autocomplete="off">
             <label class="btn btn-outline-primary" for="btnradio5">&emsp;#5&emsp;</label>
           </div>
-          <a class="btn btn-lg btn-success" href="comment.html" role="button">Suivant</a>
+          <button id="nextButton" class="btn btn-lg btn-success" onclick="Controller.nextStage()" role="button">Suivant</button>
         </div>
       </div>
     </div>

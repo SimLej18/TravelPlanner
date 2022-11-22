@@ -39,7 +39,7 @@ body > .card {
 }
 
 .card-tour > .card-img-top {
-  height: 33%;
+  height: 50%;
 }
 
 .btn {
@@ -146,4 +146,8 @@ body > .card {
 
 .summary-container {
   overflow: scroll;
+}
+
+.info-container > span {
+  padding: 0 1em;
 }
