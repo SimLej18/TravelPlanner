@@ -2,20 +2,67 @@
 Here we manage the user interface.
 */
 
-function changeTitleAndHideParagraph() {
-    let name = getName();
-    $(".paragraph").hide();  // Hides the paragraph
-    $("h1").text("Salut "+name+" !")  // Change title text
-}
-
 class View {
+    static loadDatePicker() {
+        const getDatePickerTitle = elem => {
+            // From the label or the aria-label
+            const label = elem.nextElementSibling;
+            let titleText = '';
+            if (label && label.tagName === 'LABEL') {
+                titleText = label.textContent;
+            } else {
+                titleText = elem.getAttribute('aria-label') || '';
+            }
+            return titleText;
+        }
+
+        const elems = document.querySelectorAll('.datepicker_input');
+        for (const elem of elems) {
+            const datepicker = new Datepicker(elem, {
+                'format': 'dd/mm/yyyy', // UK format
+                title: getDatePickerTitle(elem)
+            });
+        }
+
+        let dp = $("#datePickerInput");
+        dp.val(`${new Date().getDate()}/${new Date().getMonth()+1}/${new Date().getFullYear()}`);
+        dp.focus(() => View.notReadyToStart())
+        dp.focusout(() => {
+            if (!$(".datepicker").hasClass("active"))
+                Controller.changeDate(dp.val())  // Datepicker closed
+        });
+    }
+
+    static notReadyToStart() {
+        $("#startButton").prop("disabled", true);
+        $("#buttonText").prop("hidden", true);
+        $("#buttonSpinner").prop("hidden", false);
+    }
+
+    static readyToStart() {
+        $("#startButton").prop("disabled", false);
+        $("#buttonText").prop("hidden", false);
+        $("#buttonSpinner").prop("hidden", true);
+    }
+
     static loadSuggestions(suggestions, likes) {
         /* Loads the data contained in a list of 3 excursions into the cards of generation.html */
+        // Somehow loading maps while hidden doesn't work
+        $(".spinner").prop("hidden", true);
+        $(".label").prop("hidden", false);
+        $(".prop-body").prop("hidden", false);
+
+        // Activate tooltips
+        $("#likeTooltip").text(`${likes} personnes ont déjà aimé cette excursion !`);
+
         for (let i of [1, 2, 3]) {
             let exc = suggestions[i-1];
             for (let j of [1, 2, 3, 4, 5]) {
                 $("#stage"+i+"-"+j).text(`${j}: `+exc[j-1].name);
             }
+            $("#count"+i+"-"+1).append(exc.filter(s => s.type === "event").length);
+            $("#count"+i+"-"+2).append(exc.filter(s => s.type === "museum").length);
+            $("#count"+i+"-"+3).append(exc.filter(s => s.type === "monument").length);
             View.loadMap("mapdiv"+i, exc);
         }
     }
@@ -23,6 +70,7 @@ class View {
     static loadSummary(excursion) {
         for (let i of [1, 2, 3, 4, 5]) {
             $("#type"+i).text(excursion[i-1].type === "museum" ? "Musée" : excursion[i-1].type === "monument" ? "Monument" : "Événement");
+            $("#type"+i).addClass(excursion[i-1].type === "museum" ? "text-bg-primary" : excursion[i-1].type === "monument" ? "text-bg-danger" : "text-bg-success")
             $("#title"+i).text(excursion[i-1].name)
         }
         View.loadMap("mapdiv", excursion);

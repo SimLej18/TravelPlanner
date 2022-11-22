@@ -76,11 +76,13 @@ function validatePath(path) {
   * Validate a given path. Verifications include :
   *   - path must go through at least a museum
   *   - path must go through at least two monuments
+  *   - path must not be longer than 5km
   * Return true if the path is valid, false otherwise
   */
   let valid = true;
   valid = valid && path.some(s => s instanceof Museum);
   valid = valid && path.filter(s => s instanceof Monument).length >= 2;
+  valid = valid && Utils.totalDistance(path) < 5;
   return valid
 }
 
@@ -142,6 +144,14 @@ class Utils {
       dist = dist * 60 * 1.1515 * 1.609344;
       return dist;
     }
+  }
+
+  static totalDistance(excursion) {
+    let total = 0;
+    for (let i = 0 ; i < excursion.length-1 ; i++) {
+      total += Utils.distanceBetween(excursion[i], excursion[i+1])
+    }
+    return total;
   }
 
 }

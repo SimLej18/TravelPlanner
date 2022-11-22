@@ -6,19 +6,27 @@ to treat them correctly
 class Controller {
   static currentStage = 1;
 
-  static async createMockDB() {
+  static async createMockDB(date) {
     let mockDatabase = { excursions: [] };
 
     mockDatabase.excursions.push({
-      stages: await generateExcursion(new Date(2022, 10, 21)),
+      stages: await generateExcursion(date),
       likes: 23
     });
     mockDatabase.excursions.push({
-      stages: await generateExcursion(new Date(2022, 10, 21)),
+      stages: await generateExcursion(date),
       likes: 12
     });
 
+    save("date", date);
     save("mockDB", mockDatabase);
+  }
+
+  static async changeDate(dateStr) {
+    dateStr = dateStr.split("/");
+    let date = new Date(parseInt(dateStr[2]), parseInt(dateStr[1])-1, parseInt(dateStr[0]));
+    await Controller.createMockDB(date)
+    View.readyToStart()
   }
 
   static start() {
@@ -31,7 +39,10 @@ class Controller {
       existingExcursionID = getRandomExistingExcursionID(get("mockDB"));
       let existingExcursion = get("mockDB").excursions[existingExcursionID];
       save("existingExcursionID", existingExcursionID);
-      save("suggestions", [existingExcursion.stages, await generateExcursion(Date()), await generateExcursion(Date())]);
+      save("suggestions", [
+          existingExcursion.stages,
+        await generateExcursion(new Date(get("date"))),
+        await generateExcursion(new Date(get("date")))]);
     }
     else {
       existingExcursionID = get("existingExcursionID");

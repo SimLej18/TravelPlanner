@@ -1,6 +1,6 @@
 /*
 Here we define all the styles of the components of the website.
-The welectors are the same as for JQuery.
+The selectors are the same as for JQuery.
 */
 
 /* ------------ HTML elements ------------ */
@@ -8,7 +8,8 @@ The welectors are the same as for JQuery.
 body {
   background-image: url("../images/namur.jpeg");
   background-size: cover;
-  padding: 5em;
+  padding: 5rem;
+  overflow: hidden
 }
 
 body > .card {
@@ -19,32 +20,42 @@ body > .card {
 /* ------------ Bootstrap classes ------------ */
 
 .card {
-  border-radius: 2em;
+  border-radius: 2rem;
   box-shadow: 0 5px 10px rgba(0,0,0,.5);
 }
 
-.card > .card-body {
-  margin: 1em;
-}
-
 .card-body {
+  margin: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   text-align: center;
+  overflow: scroll;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.spinner > .spinner-border {
+  width: 5rem;
+  height: 5rem;
 }
 
 .card-img-top {
-  border-radius: 2em;
+  border-radius: 2rem 0;
   height: 33%;
 }
 
 .card-tour > .card-img-top {
-  height: 50%;
+  min-height: 50%;
 }
 
 .btn {
-  border-radius: 1em;
+  border-radius: 1rem;
   box-shadow: 0 5px 10px rgba(0,0,0,.2);
 }
 
@@ -58,23 +69,53 @@ body > .card {
 
 /* ------------ Custom classes ------------ */
 
+.travel-planifier-title {
+  padding-top: 5rem;
+}
+
+.welcome-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.start-button {
+  height: 3rem;
+}
+
+.generation-page * .olButton {
+  visibility: hidden;
+}
+
 .wrapper {
   width: 100%;
   height: 100%;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-gap: 2em;
+  grid-gap: 2rem;
   grid-template-rows: min-content 1fr;
 }
 
 .titleCard {
   grid-column: 1 / 4;
   grid-row: 1;
-  padding: 1em;
+  padding: 1rem;
 }
 
 .titleCard > .card-body {
   margin: 0;
+}
+
+.label {
+  position: absolute;
+  top: -1.5rem;
+  left: -1.5rem;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  border-width: 5px;
+  background-color: white;
+  z-index: 9999;
 }
 
 .prop1 {
@@ -92,28 +133,86 @@ body > .card {
   grid-row: 2;
 }
 
+.prop-body {
+  height: 100%;
+}
+
+.prop-body > .card-body {
+  height: 67%;
+  margin: 0;
+  padding: 1rem;
+  overflow: scroll;
+}
+
+.prop-button {
+  position: absolute;
+  bottom: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.prop-button > .btn {
+  width: 80%;
+}
+
+.counts-container {
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.stages-container {
+  margin-bottom: 3rem;
+}
+
 .card-validate {
   display: flex;
   flex-direction: row;
 }
 
 .card-map-left {
-  border-radius: 3em 0 0 3em;
   width: 66%;
 }
 
+.card-validate > .card-body {
+  width: 34%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .map-left {
-  border-radius: 3em 0 0 3em;
+  border-radius: 2rem 0 0 2rem;
   overflow: hidden;
 }
-TP-Logo
+
 .map-top {
-  border-radius: 2em 2em 0 0;
+  border-radius: 2rem 2rem 0 0;
+  height: 100%;
   overflow: hidden;
+}
+
+.card-tour > .card-img-top {
+  height: 60%;
+}
+
+.card-tour > .card-body {
+  height: 34%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .btn-container {
   display: flex;
+  justify-content: space-between;
+}
+
+.card-comment > .card-body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 
@@ -123,20 +222,15 @@ TP-Logo
 }
 
 .appreciation {
-  padding-top: 1.7em;
-  height: 12em;
-  width: 12em;
+  padding-top: 1.7rem;
+  height: 12rem;
+  width: 12rem;
   border-radius: 50%;
   border-width: 5px;
 }
 
 .appreciation > .bi {
-  font-size: 9em;
-}
-
-.stages-container {
-  height: 16em;
-  overflow: scroll;
+  font-size: 9rem;
 }
 
 .separator {
@@ -155,7 +249,12 @@ TP-Logo
 }
 
 .summary-stage {
-  padding: 0.2em 0;
+  padding: 0.33rem;
+  border-radius: 0.3rem;
+}
+
+.summary-stage:hover {
+  background-color: #e5e5e5;
 }
 
 .summary-container {
@@ -163,5 +262,58 @@ TP-Logo
 }
 
 .info-container > span {
-  padding: 0 1em;
+  padding: 0 1rem;
+}
+
+/* ------------ Tooltip ------------ */
+
+.my-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.my-tooltip .my-tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.my-tooltip .my-tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.my-tooltip:hover .my-tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ------------ Datepicker ------------ */
+
+/* Adapts a floating label for use with a left-handed input group icon */
+.form-floating > .bi-calendar-date + .datepicker_input + label {
+  padding-left: 3.5rem;
+  z-index: 3;
+}
+
+.date-picker {
+  margin: auto;
+  width: 33%;
 }
