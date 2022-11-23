@@ -6,7 +6,13 @@ to treat them correctly
 class Controller {
   static currentStage = 1;
 
+
+  /* --------- index.html functions --------- */
+
   static async createMockDB(date) {
+    /*
+    * Create a mock database for prototype use
+    */
     let mockDatabase = { excursions: [] };
 
     mockDatabase.excursions.push({
@@ -23,6 +29,9 @@ class Controller {
   }
 
   static async changeDate(dateStr) {
+    /*
+    * Change the date of the search for events
+    */
     dateStr = dateStr.split("/");
     let date = new Date(parseInt(dateStr[2]), parseInt(dateStr[1])-1, parseInt(dateStr[0]));
     await Controller.createMockDB(date)
@@ -30,10 +39,19 @@ class Controller {
   }
 
   static start() {
+    /*
+    * Go to generation.html
+    */
     window.location.href = "docs/generation.html";
   }
 
+
+  /* --------- generation.html functions --------- */
+
   static async createSuggestions() {
+    /*
+    * Retrieve one existing excursion and generate two random ones
+    */
     let existingExcursionID = -1;
     if (get("comingBack") == null) {
       existingExcursionID = getRandomExistingExcursionID(get("mockDB"));
@@ -51,11 +69,17 @@ class Controller {
   }
 
   static choseSuggestion(nb) {
+    /*
+    * User made a choice between the 3 propositions
+    */
     if (nb === 1)
       save("choseExistingExcursion", true)
     save("excursion", get("suggestions")[nb-1]);
     window.location.href = "../docs/validate.html";
   }
+
+
+  /* --------- validate.html functions --------- */
 
   static loadSummary() {
     View.loadSummary(get("excursion"));
@@ -69,6 +93,9 @@ class Controller {
   static validateSummary() {
     window.location.href = "../docs/tour.html";
   }
+
+
+  /* --------- tour.html functions --------- */
 
   static loadStage() {
     View.loadStage(get("excursion"), Controller.currentStage);
@@ -92,6 +119,9 @@ class Controller {
     Controller.currentStage--;
     Controller.loadStage();
   }
+
+
+  /* --------- comment.html functions --------- */
 
   static giveAppreciation(appreciation) {
     View.disableAppreciation();
@@ -128,6 +158,9 @@ class Controller {
     View.thank(appreciation);
   }
 }
+
+
+/* --------- util functions to get mock database elements --------- */
 
 function save(key, object) {
   localStorage.setItem(key, JSON.stringify(object));

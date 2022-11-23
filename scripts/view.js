@@ -3,6 +3,9 @@ Here we manage the user interface.
 */
 
 class View {
+    /*
+    * This class methods' manage all aspects of the various DOM elements rendering
+    */
 
     static loadDatePicker() {
         const getDatePickerTitle = elem => {

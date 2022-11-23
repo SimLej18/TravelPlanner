@@ -9,9 +9,3 @@ async function initApp() {
     // Add mock data to db
     await Controller.createMockDB(Date());
 }
-
-//TODO: map routing
-//  ->TODO: update OpenLayers
-//TODO: map transitions
-//TODO: map tooltips w/ mouseover
-//TODO: test other navigators / screen size

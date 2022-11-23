@@ -151,5 +151,8 @@ async function getMonuments() {
 }
 
 function getRandomExistingExcursionID(mockDatabase) {
+    /*
+    * Cette fonction renvoie une excursion existante aléatoire
+    */
     return Math.floor(Math.random()*mockDatabase.excursions.length);
 }
