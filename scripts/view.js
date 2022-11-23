@@ -3,6 +3,7 @@ Here we manage the user interface.
 */
 
 class View {
+
     static loadDatePicker() {
         const getDatePickerTitle = elem => {
             // From the label or the aria-label
@@ -116,6 +117,10 @@ class View {
         else {
             $("#nextButton").text("Fini !");
         }
+    }
+
+    static disableAppreciation() {
+        $(".appreciation").prop("disabled", true);
     }
 
     static thank(appreciation) {

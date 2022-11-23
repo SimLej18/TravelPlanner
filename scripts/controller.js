@@ -94,6 +94,8 @@ class Controller {
   }
 
   static giveAppreciation(appreciation) {
+    View.disableAppreciation();
+
     let mockDB = get("mockDB");
     let excursionID = get("existingExcursionID");
     let choseExistingExcursion = get("choseExistingExcursion");
