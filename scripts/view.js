@@ -7,6 +7,10 @@ class View {
     * This class methods' manage all aspects of the various DOM elements rendering
     */
 
+    static initView() {
+        $("body").css("maxHeight", $("body").css("width"));
+    }
+
     static loadDatePicker() {
         const getDatePickerTitle = elem => {
             // From the label or the aria-label
@@ -67,7 +71,7 @@ class View {
             $("#count"+i+"-"+1).append(exc.filter(s => s.type === "event").length);
             $("#count"+i+"-"+2).append(exc.filter(s => s.type === "museum").length);
             $("#count"+i+"-"+3).append(exc.filter(s => s.type === "monument").length);
-            View.loadMap("mapdiv"+i, exc);
+            View.loadMap("mapdiv"+i, exc, 1, 14);
         }
     }
 
@@ -132,39 +136,76 @@ class View {
         $("#message-did-like").prop("hidden", appreciation !== 2);
     }
 
-    static loadMap(mapID, excursion) {
+    static loadMap(mapID, excursion, markorSize= 2, zoom=15) {
         // Instantiate map and save its reference into the DOM
-        let map = new OpenLayers.Map(mapID);
+        let map = new ol.Map({
+            target: mapID,
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat([
+                    excursion.reduce((a, s) => a+s.latitude, 0)/excursion.length,  // Average latitude
+                    excursion.reduce((a, s) => a+s.longitude, 0)/excursion.length  // Average longitude
+                ]),
+                zoom: zoom
+            })
+        });
         $("#"+mapID).data("ref", map);
-        map.addLayer(new OpenLayers.Layer.OSM());
-
-        // Center map to average location of the excursion
-        View.centerMap(map,
-            excursion.reduce((a, s) => a+s.longitude, 0)/excursion.length,  // Avergage longitude
-            excursion.reduce((a, s) => a+s.latitude, 0)/excursion.length,  // Avergage latitude
-            13.5  // Zoom
-            )
 
         // Add markers to the map
-        let markers = new OpenLayers.Layer.Markers( "Markers" );
-        map.addLayer(markers);
+        let colors = {"event": "198754", "museum": "0d6efd", "monument": "DC3545"}
+        for (let type of ["event", "museum", "monument"]) {
+            let markerSVG = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"%23"+colors[type]+"\" class=\"bi bi-geo-alt-fill\" viewBox=\"0 0 16 16\"><path d=\"M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0- 3 3 0 0 1 0 \"/></svg>"
+            let markers = new ol.layer.Vector({
+                source: new ol.source.Vector(),
+                style: new ol.style.Style({
+                    image: new ol.style.Icon({
+                        opacity: 1,
+                        src: 'data:image/svg+xml;utf8,' + markerSVG,
+                        scale: markorSize,
+                    })
+                })
+            });
+            map.addLayer(markers);
 
-        for (let stage of excursion) {
-            let loc = new OpenLayers.LonLat(stage.latitude, stage.longitude)
-                .transform(
-                    new OpenLayers.Projection("EPSG:4326"),
-                    map.getProjectionObject()
-                );
-            markers.addMarker(new OpenLayers.Marker(loc));
+            for (let elem of excursion) {
+                if (elem.type === type) {
+                    let marker = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat([elem.latitude, elem.longitude])));
+                    markers.getSource().addFeature(marker);
+                }
+            }
         }
     }
 
-    static centerMap(map, longitude, latitude, zoom) {
-        let coord = new OpenLayers.LonLat(latitude, longitude).transform(
-            new OpenLayers.Projection("EPSG:4326"),
-            map.getProjectionObject()
-        );
+    static emphasizeStage(stage) {
+        let map = $("#mapdiv").data("ref");
+        let colors = {"event": "198754", "museum": "0d6efd", "monument": "DC3545"}
 
-        map.setCenter(coord, zoom);
+        let markerSVG = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"%23"+colors[stage.type]+"\" class=\"bi bi-geo-alt-fill\" viewBox=\"0 0 16 16\"><path d=\"M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0- 3 3 0 0 1 0 \"/></svg>"
+        let emph = new ol.layer.Vector({
+            source: new ol.source.Vector(),
+            style: new ol.style.Style({
+                image: new ol.style.Icon({
+                    opacity: 1,
+                    src: 'data:image/svg+xml;utf8,' + markerSVG,
+                    scale: 3,
+                })
+            })
+        });
+        map.addLayer(emph);
+        let marker = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat([stage.latitude, stage.longitude])));
+        emph.getSource().addFeature(marker);
+    }
+
+    static deEmphasize() {
+        let map = $("#mapdiv").data("ref");
+        (map.getLayers().array_[map.getLayers().array_.length-1]).getSource().clear();
+    }
+
+    static centerMap(map, longitude, latitude, zoom) {
+        map.getView().animate({center: ol.proj.fromLonLat([latitude, longitude])}, {zoom: zoom});
     }
 }

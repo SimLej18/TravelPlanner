@@ -64,7 +64,7 @@ body > .card {
   box-shadow: none;
 }
 
-.olControlAttribution {
+.ol-attribution {
   visibility: hidden;
 }
 
@@ -181,6 +181,11 @@ body > .card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
 }
 
 .map-left {

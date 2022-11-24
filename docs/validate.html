@@ -7,7 +7,8 @@
     <script src="../libraries/jquery.min.js"></script>
     <script src="../libraries/bootstrap.bundle.min.js"></script>
     <link href="../libraries/bootstrap.min.css" rel="stylesheet">
-    <script src="https://openlayers.org/api/2.13.1/OpenLayers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.1.0/ol.css" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/ol@v7.1.0/dist/ol.js"></script>
 
     <link rel="stylesheet" href="../styles/styles.css">
     <script src="../scripts/data.js" defer></script>
@@ -17,6 +18,7 @@
 
     <script>
       $(document).ready(async () => {
+        View.initView()
         Controller.loadSummary();
       })
     </script>
@@ -25,40 +27,40 @@
   <body>
     <div class="card card-validate">
       <div class="card-map-left">
-        <div id="mapdiv" class="map-left"></div>
+        <div id="mapdiv" class="map map-left"></div>
       </div>
       <div class="card-body">
         <h1>Résumé de votre excursion :</h1>
         <div class="summary-container">
-          <div class="summary-stage">
+          <div class="summary-stage" onmouseenter="Controller.emphasize(1)" onmouseleave="Controller.deEmphasize()">
             <div class="separator">
               <h4><span id="type1" class="badge"></span></h4>
               <div><hr/></div>
             </div>
             <p id="title1" class="text-start fs-6"></p>
           </div>
-          <div class="summary-stage">
+          <div class="summary-stage" onmouseenter="Controller.emphasize(2)" onmouseleave="Controller.deEmphasize()">
             <div class="separator">
               <h4><span id="type2" class="badge"></span></h4>
               <div><hr/></div>
             </div>
             <p id="title2" class="text-start fs-6"></p>
           </div>
-          <div class="summary-stage">
+          <div class="summary-stage" onmouseenter="Controller.emphasize(3)" onmouseleave="Controller.deEmphasize()">
             <div class="separator">
               <h4><span id="type3" class="badge"></span></h4>
               <div><hr/></div>
             </div>
             <p id="title3" class="text-start fs-6"></p>
           </div>
-          <div class="summary-stage">
+          <div class="summary-stage" onmouseenter="Controller.emphasize(4)" onmouseleave="Controller.deEmphasize()">
             <div class="separator">
               <h4><span id="type4" class="badge"></span></h4>
               <div><hr/></div>
             </div>
             <p id="title4" class="text-start fs-6"></p>
           </div>
-          <div class="summary-stage">
+          <div class="summary-stage" onmouseenter="Controller.emphasize(5)" onmouseleave="Controller.deEmphasize()">
             <div class="separator">
               <h4><span id="type5" class="badge"></span></h4>
               <div><hr/></div>

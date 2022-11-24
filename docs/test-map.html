@@ -9,10 +9,13 @@
 
     <script src="../scripts/data.js"></script>
     <script src="../scripts/random_logic.js"></script>
+    <link rel="stylesheet" href="../styles/styles.css">
 </head>
 
 <body>
-<div id="map" style="height: 600px;width: 100%;"></div>
+<div style="height: 500px">
+    <div id="map" class="map"></div>
+</div>
 
 <script type="text/javascript">
     let map = new ol.Map({
@@ -28,7 +31,7 @@
         })
     });
 
-    buildMap()
+    //buildMap()
 
     async function buildMap() {
         let date = new Date(2022, 8, 26)

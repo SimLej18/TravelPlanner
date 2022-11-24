@@ -94,6 +94,14 @@ class Controller {
     window.location.href = "../docs/tour.html";
   }
 
+  static emphasize(id) {
+    View.emphasizeStage(get("excursion")[id-1]);
+  }
+
+  static deEmphasize() {
+    View.deEmphasize();
+  }
+
 
   /* --------- tour.html functions --------- */
 

@@ -76,13 +76,13 @@ function validatePath(path) {
   * Validate a given path. Verifications include :
   *   - path must go through at least a museum
   *   - path must go through at least two monuments
-  *   - path must not be longer than 5km
+  *   - path must not be longer than 3km
   * Return true if the path is valid, false otherwise
   */
   let valid = true;
   valid = valid && path.some(s => s instanceof Museum);
   valid = valid && path.filter(s => s instanceof Monument).length >= 2;
-  valid = valid && Utils.totalDistance(path) < 5;
+  valid = valid && Utils.totalDistance(path) < 3;
   return valid
 }
 
