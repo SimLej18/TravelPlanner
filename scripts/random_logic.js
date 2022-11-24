@@ -7,7 +7,7 @@ async function generateExcursion(date) {
   * Generate an excursion from all events recoverable from data.js available at a given date
   */
   let excursion = undefined;
-  let graph =  await createGraph(date, 3);
+  let graph =  await createGraph(date, 2);
   let valid = false;
 
   while (!valid) {
